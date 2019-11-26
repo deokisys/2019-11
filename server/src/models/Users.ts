@@ -26,20 +26,20 @@ export class Users {
   mannerPoint: number
 
   @Column()
-  isDelete: boolean;
+  isDelete: boolean
 
   @Column()
-  email: string;
+  email: string
 
   @OneToMany(
     type => Products,
-    Products => Products.id
+    product => product.user
   )
   products: Products[]
 
   @OneToMany(
     type => AuctionLogs,
-    auctionlogs => auctionlogs.id
+    auctionlogs => auctionlogs.user
   )
   auctionLogs: AuctionLogs[]
 }

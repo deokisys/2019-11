@@ -18,12 +18,12 @@ export class AuctionLogs {
 
   @ManyToOne(
     type => Products,
-    products => products.id
+    products => products.auctionLogs
   )
   product: Products
   @ManyToOne(
     type => Users,
-    users => users.id
+    users => users.auctionLogs
   )
   user: Users
 }

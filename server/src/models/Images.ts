@@ -11,7 +11,7 @@ export class Images {
 
   @ManyToOne(
     type => Products,
-    products => products.id
+    products => products.images
   )
   product: Products
 }

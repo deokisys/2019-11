@@ -40,19 +40,19 @@ export class Products {
 
   @OneToMany(
     type => Images,
-    images => images.id
+    images => images.product
   )
   images: Images[]
 
   @ManyToOne(
     type => Users,
-    users => users.id
+    user => user.products
   )
   user: Users
 
   @OneToMany(
     type => AuctionLogs,
-    auctionlogs => auctionlogs.id
+    auctionlogs => auctionlogs.product
   )
   auctionLogs: AuctionLogs[]
 }
