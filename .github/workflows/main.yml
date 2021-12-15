@@ -18,7 +18,7 @@ jobs:                                 # Job 설정
       - name: checkout source code    # 파일 가져오기
         uses: actions/checkout@v2  # 브랜치 확인
         with:
-          repository: 'actionTEST'
+          repository: 'deokisys/actionTEST'
 
       - name: use node version ${{matrix.node-version}} # 노드 버전 설치
         uses: actions/setup-node@v1
