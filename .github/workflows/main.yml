@@ -1,0 +1,41 @@
+name: react buld                     # Workflow 이름
+on: 
+  push:                           # Event 감지
+    branches :
+      - actionTEST # 해당 브랜치에서 push가 일어날때 실행
+
+jobs:                                 # Job 설정
+  build:                              # Job ID
+    name: react build start        # Job 이름
+    runs-on: ubuntu-16.04             # Job 가상환경 인스턴스
+    env:
+      working-directory: ./client # 환경 폴더 경로 저장
+    strategy:
+      matrix:
+        node-version: [12.13.0]     # 12.13.0 버전 실행
+
+    steps:                            # Steps
+      - name: checkout source code    # 파일 가져오기
+        uses: actions/checkout@actionTEST  # 브랜치 확인
+
+      - name: use node version ${{matrix.node-version}} # 노드 버전 설치
+        uses: actions/setup-node@v1
+        with:
+              node-version: ${{ matrix.node-version }}
+        
+      - name: cache node modules # node_models를 캐시하여 매번npm install 시간 아끼기
+        uses: actions/cache@v1
+        with:
+          path: node_modules # 저장할 대상 폴더
+          key: ${{runners.OS}}-build-${{hashFiles('**/package-lock.json')}} # 저장후 식별 가능 키값
+          restore-keys: |     # 키가 일치한게 없을때 차선책의 키(옵션)
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+
+      - name: yarn install           # 설치
+        run: yarn install
+        working-directory: ${{ env.working-directory }}
+
+      - name: yarn build              # 빌드시작
+        run: yarn build    
+        working-directory: ${{ env.working-directory }}        
