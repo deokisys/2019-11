@@ -7,7 +7,7 @@ on:
 jobs:                                 # Job 설정
   build:                              # Job ID
     name: react build start        # Job 이름
-    runs-on: ubuntu-16.04             # Job 가상환경 인스턴스
+    runs-on: ubuntu-18.04             # Job 가상환경 인스턴스
     env:
       working-directory: ./client # 환경 폴더 경로 저장
     strategy:
