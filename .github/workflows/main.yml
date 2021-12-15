@@ -35,9 +35,13 @@ jobs:                                 # Job 설정
             ${{ runner.OS }}-
 
       - name: yarn install           # 설치
-        run: yarn install
+        uses: borales/actions-yarn@v1.19.1
+        with:
+          cmd: install
         working-directory: ${{ env.working-directory }}
 
       - name: yarn build              # 빌드시작
-        run: yarn build    
+        run: borales/actions-yarn@v1.19.1   
+        with:
+          cmd: build
         working-directory: ${{ env.working-directory }}        
