@@ -4,7 +4,7 @@ on:
     branches :
       - actionTEST # 해당 브랜치에서 push가 일어날때 실행
 
-default: 
+defaults: 
   run: 
     working-directory: ./client # 실행되는 폴더 경로 저장
 
