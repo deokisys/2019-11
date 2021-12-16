@@ -10,6 +10,7 @@ jobs:                                 # Job 설정
     runs-on: ubuntu-18.04             # Job 가상환경 인스턴스
     env:
       working-directory: ./client # 환경 폴더 경로 저장
+      CI: false # Treating warnings as errors because process.env.CI = true. 경고가 에러로 나와서
     strategy:
       matrix:
         node-version: [12.13.0]     # 12.13.0 버전 실행
@@ -58,7 +59,7 @@ jobs:                                 # Job 설정
       
 
       - name: yarn build              # 빌드시작
-        run: CI = npm run build
+        run: yarn build
         working-directory: ${{ env.working-directory }}        
       
       - name: gh설치
