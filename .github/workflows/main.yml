@@ -58,7 +58,7 @@ jobs:                                 # Job 설정
       
 
       - name: yarn build              # 빌드시작
-        run: yarn run build
+        run: CI = npm run build
         working-directory: ${{ env.working-directory }}        
       
       - name: gh설치
