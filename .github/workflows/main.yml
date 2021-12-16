@@ -36,9 +36,9 @@ jobs:                                 # Job 설정
             ${{ runner.OS }}-
 
       - name: yarn install           # 설치
-        runs: yarn install
+        run: yarn install
         working-directory: ${{ env.working-directory }}
 
       - name: yarn build              # 빌드시작
-        runs: yarn build
+        run: yarn build
         working-directory: ${{ env.working-directory }}        
