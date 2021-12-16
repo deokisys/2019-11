@@ -29,7 +29,6 @@ jobs:                                 # Job 설정
         with:
           node-version: ${{ matrix.node-version }}
           # cache: 'npm'
-          # cache-dependency-path: ${{ env.working-directory }}/package-lock.json
           # cache-dependency-path: package-lock.json
       
       - name: version check node
