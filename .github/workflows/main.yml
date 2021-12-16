@@ -21,13 +21,13 @@ jobs:                                 # Job 설정
           ref: 'actionTEST'
 
       - name: use node version ${{matrix.node-version}} # 노드 버전 설치
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
         
       - name: cache node modules # node_models를 캐시하여 매번npm install 시간 아끼기
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: node_modules # 저장할 대상 폴더
           key: ${{runner.OS}}-build-${{hashFiles('**/yarn.lock')}} # 저장후 식별 가능 키값, runner.os 는 리눅스가 된다고 한다.
