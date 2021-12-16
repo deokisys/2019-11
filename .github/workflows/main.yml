@@ -52,8 +52,10 @@ jobs:                                 # Job 설정
       #   working-directory: ${{ env.working-directory }}        
       
       - name: gh설치
-        run: yarn install gh-pages
+        run: yarn add gh-pages
         working-directory: ${{ env.working-directory }}  
-        
+      
+      - name: gh확인
+        run: gh-pages -v
       # - name: gh올리기
       #   run: gh-pages -d ${{ env.working-directory }}/dist
