@@ -49,9 +49,11 @@ jobs:                                 # Job 설정
 
       - name: yarn upgrade
         run: yarn upgrade
+        working-directory: ${{ env.working-directory }}
       
       - name: yarn add
         run: yarn add yarn
+        working-directory: ${{ env.working-directory }}
 
       
 
