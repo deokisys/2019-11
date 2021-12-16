@@ -42,25 +42,28 @@ jobs:                                 # Job 설정
       #     restore-keys: |     # 키가 일치한게 없을때 차선책의 키(옵션)
       #       ${{ runner.OS }}-build-
       #       ${{ runner.OS }}-
-      - name: yarn upgrade
-        run: yarn upgrade
-      
-      - name: yarn add
-        run: yarn add
 
       - name: yarn install           # 설치
         run: yarn install
         working-directory: ${{ env.working-directory }}
 
-      # - name: yarn build              # 빌드시작
-      #   run: yarn run build
-      #   working-directory: ${{ env.working-directory }}        
+      - name: yarn upgrade
+        run: yarn upgrade
+      
+      - name: yarn add
+        run: yarn add yarn
+
+      
+
+      - name: yarn build              # 빌드시작
+        run: yarn run build
+        working-directory: ${{ env.working-directory }}        
       
       - name: gh설치
         run: yarn add gh-pages
         working-directory: ${{ env.working-directory }}  
       
-      - name: gh확인
-        run: gh-pages -v
+      # - name: gh확인
+      #   run: gh-pages -v
       # - name: gh올리기
       #   run: gh-pages -d ${{ env.working-directory }}/dist
