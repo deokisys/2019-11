@@ -23,25 +23,22 @@ jobs:                                 # Job 설정
       - name: use node version ${{matrix.node-version}} # 노드 버전 설치
         uses: actions/setup-node@v1
         with:
-              node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
         
       - name: cache node modules # node_models를 캐시하여 매번npm install 시간 아끼기
         uses: actions/cache@v1
         with:
           path: node_modules # 저장할 대상 폴더
-          key: ${{runner.OS}}-build-${{hashFiles('**/package-lock.json')}} # 저장후 식별 가능 키값, runner.os 는 리눅스가 된다고 한다.
+          key: ${{runner.OS}}-build-${{hashFiles('**/yarn.lock')}} # 저장후 식별 가능 키값, runner.os 는 리눅스가 된다고 한다.
           restore-keys: |     # 키가 일치한게 없을때 차선책의 키(옵션)
             ${{ runner.OS }}-build-
             ${{ runner.OS }}-
 
       - name: yarn install           # 설치
-        uses: borales/actions-yarn@v1.19.1
-        with:
-          cmd: install
+        runs: yarn install
         working-directory: ${{ env.working-directory }}
 
       - name: yarn build              # 빌드시작
-        run: borales/actions-yarn@v1.19.1   
-        with:
-          cmd: build
+        runs: yarn build
         working-directory: ${{ env.working-directory }}        
