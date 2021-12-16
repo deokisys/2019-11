@@ -4,12 +4,15 @@ on:
     branches :
       - actionTEST # 해당 브랜치에서 push가 일어날때 실행
 
+default: 
+  run: 
+    working-directory: ./client # 실행되는 폴더 경로 저장
+
 jobs:                                 # Job 설정
   build:                              # Job ID
     name: react build start        # Job 이름
     runs-on: ubuntu-18.04             # Job 가상환경 인스턴스
     env:
-      working-directory: ./client # 환경 폴더 경로 저장
       CI: false # Treating warnings as errors because process.env.CI = true. 경고가 에러로 나와서
     strategy:
       matrix:
@@ -46,25 +49,25 @@ jobs:                                 # Job 설정
 
       - name: yarn install           # 설치
         run: yarn install
-        working-directory: ${{ env.working-directory }}
+        # working-directory: ${{ env.working-directory }}
 
       - name: yarn upgrade
         run: yarn upgrade
-        working-directory: ${{ env.working-directory }}
+        # working-directory: ${{ env.working-directory }}
       
       - name: yarn add
         run: yarn add yarn
-        working-directory: ${{ env.working-directory }}
+        # working-directory: ${{ env.working-directory }}
 
       
 
       - name: yarn build              # 빌드시작
         run: yarn build
-        working-directory: ${{ env.working-directory }}        
+        # working-directory: ${{ env.working-directory }}        
       
       - name: gh설치
         run: yarn add gh-pages
-        working-directory: ${{ env.working-directory }}  
+        # working-directory: ${{ env.working-directory }}  
       
       # - name: gh확인
       #   run: gh-pages -v
