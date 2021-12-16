@@ -34,14 +34,14 @@ jobs:                                 # Job 설정
       - name: version check yarn
         run: yarn -v
 
-      - name: cache node modules # node_models를 캐시하여 매번npm install 시간 아끼기
-        uses: actions/cache@v2
-        with:
-          path: node_modules # 저장할 대상 폴더
-          key: ${{runner.OS}}-build-${{hashFiles('**/yarn.lock')}} # 저장후 식별 가능 키값, runner.os 는 리눅스가 된다고 한다.
-          restore-keys: |     # 키가 일치한게 없을때 차선책의 키(옵션)
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+      # - name: cache node modules # node_models를 캐시하여 매번npm install 시간 아끼기
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: node_modules # 저장할 대상 폴더
+      #     key: ${{runner.OS}}-build-${{hashFiles('**/yarn.lock')}} # 저장후 식별 가능 키값, runner.os 는 리눅스가 된다고 한다.
+      #     restore-keys: |     # 키가 일치한게 없을때 차선책의 키(옵션)
+      #       ${{ runner.OS }}-build-
+      #       ${{ runner.OS }}-
 
       - name: yarn install           # 설치
         run: yarn install
