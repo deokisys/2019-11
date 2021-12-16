@@ -48,5 +48,5 @@ jobs:                                 # Job 설정
         working-directory: ${{ env.working-directory }}
 
       - name: yarn build              # 빌드시작
-        run: yarn build
+        run: yarn run build
         working-directory: ${{ env.working-directory }}        
