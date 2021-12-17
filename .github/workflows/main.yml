@@ -28,24 +28,24 @@ jobs:                                 # Job 설정
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          # cache: 'npm'
+          cache: 'yarn'
           # cache-dependency-path: package-lock.json
       
-      - name: version check node
-        run: node -v
-      - name: version check npm
-        run: npm -v
-      - name: version check yarn
-        run: yarn -v
+      # - name: version check node
+      #   run: node -v
+      # - name: version check npm
+      #   run: npm -v
+      # - name: version check yarn
+      #   run: yarn -v
 
-      - name: cache node modules # node_models를 캐시하여 매번npm install 시간 아끼기
-        uses: actions/cache@v2
-        with:
-          path: node_modules # 저장할 대상 폴더
-          key: ${{runner.OS}}-build-${{hashFiles('**/yarn.lock')}} # 저장후 식별 가능 키값, runner.os 는 리눅스가 된다고 한다.
-          restore-keys: |     # 키가 일치한게 없을때 차선책의 키(옵션)
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+      # - name: cache node modules # node_models를 캐시하여 매번npm install 시간 아끼기
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: node_modules # 저장할 대상 폴더
+      #     key: ${{runner.OS}}-build-${{hashFiles('**/yarn.lock')}} # 저장후 식별 가능 키값, runner.os 는 리눅스가 된다고 한다.
+      #     restore-keys: |     # 키가 일치한게 없을때 차선책의 키(옵션)
+      #       ${{ runner.OS }}-build-
+      #       ${{ runner.OS }}-
 
       - name: yarn install           # 설치
         run: yarn install
@@ -73,3 +73,14 @@ jobs:                                 # Job 설정
       #   run: gh-pages -v
       # - name: gh올리기
       #   run: gh-pages -d ${{ env.working-directory }}/dist
+
+      # ncloude 에 배포하기 테스트
+      - name: Deploy                  
+        env:
+          ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+          SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 cp \
+            --recursive \
+            --region ap-northeast-2 \
+            build s3://palda-action-container.kr.ncr.ntruss.com
