@@ -85,5 +85,5 @@ jobs:                                 # Job 설정
           SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
         run: |
           aws --endpoint-url=https://kr.object.ncloudstorage.com  \
-            s3 cp --recursive ./client \
+            s3 cp \
             s3://palda-action-build/palda-action-container
