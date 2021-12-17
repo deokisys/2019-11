@@ -14,6 +14,7 @@ jobs:                                 # Job 설정
     runs-on: ubuntu-18.04             # Job 가상환경 인스턴스
     env:
       CI: false # Treating warnings as errors because process.env.CI = true. 경고가 에러로 나와서
+      working-directory: ./client
     strategy:
       matrix:
         node-version: [12.13.0]     # 12.13.0 버전 실행
@@ -29,7 +30,7 @@ jobs:                                 # Job 설정
         with:
           node-version: ${{ matrix.node-version }}
           cache: yarn
-          cache-dependency-path: client/package-lock.json
+          cache-dependency-path: ${{env.working-directory}}/package-lock.json
       
       # - name: version check node
       #   run: node -v
@@ -83,4 +84,4 @@ jobs:                                 # Job 설정
           aws s3 cp \
             --recursive \
             --region ap-northeast-2 \
-            build s3://palda-action-container.kr.ncr.ntruss.com
+            build http://palda-action-container.kr.ncr.ntruss.com
