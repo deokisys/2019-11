@@ -54,16 +54,6 @@ jobs:                                 # Job 설정
         run: yarn install
         # working-directory: ${{ env.working-directory }}
 
-      - name: yarn upgrade
-        run: yarn upgrade
-        # working-directory: ${{ env.working-directory }}
-      
-      - name: yarn add
-        run: yarn add yarn
-        # working-directory: ${{ env.working-directory }}
-
-      
-
       - name: yarn build              # 빌드시작
         run: yarn build
         # working-directory: ${{ env.working-directory }}        
@@ -95,11 +85,20 @@ jobs:                                 # Job 설정
 
 
       # ncloude 에 배포하기 테스트
+      # - name: Deploy                  
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #   run: |
+      #     aws --endpoint-url=https://kr.object.ncloudstorage.com  \
+      #       s3 cp \
+      #       s3://palda-action-build/palda-action-container
+
       - name: Deploy                  
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        run: |
-          aws --endpoint-url=https://kr.object.ncloudstorage.com  \
-            s3 cp \
-            s3://palda-action-build/palda-action-container
+        uses: prewk/s3-cp-action@v2
+        width:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          source: './client'
+          dest: 's3://palda-action-build/palda-action-container'
+          flags: --recursive
