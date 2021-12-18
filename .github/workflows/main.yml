@@ -173,11 +173,12 @@ jobs:                                 # Job 설정
 
       - name: env cmd 설치
         run: npm install -g env-cmd
-      - name: script g 설치
-        run: npm install -g react-scripts
+      # - name: script g 설치
+      #   run: npm install -g react-scripts
 
       - name:  build            # 빌드시작
-        run: env-cmd -f .env react-scripts build
+        # run: env-cmd -f .env react-scripts build
+        run: npm run build
                 
       
       # - name: gh설치
