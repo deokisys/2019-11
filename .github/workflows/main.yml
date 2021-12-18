@@ -82,8 +82,6 @@ jobs:                                 # Job 설정
       - name: config set2 
         run: aws config set secret_key ${{ secrets.AWS_ACCESS_KEY_ID }}
 
-
-      - name: config set2
       - name: aws config
         run: aws configure list
 
