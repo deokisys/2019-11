@@ -50,7 +50,10 @@ jobs:                                 # Job 설정
       # .env파일 만들기!
       - name: .env파일 만들기
         run: |
-          echo "REACT_APP_PROD_API=$REACT_APP_PROD_API 
+          echo "REACT_APP_DEV_API=$REACT_APP_DEV_API 
+          REACT_APP_DEV_CHAT=$REACT_APP_DEV_CHAT 
+
+          REACT_APP_PROD_API=$REACT_APP_PROD_API 
           REACT_APP_PROD_CHAT=$REACT_APP_PROD_CHAT 
           ## Firebase
           REACT_APP_API_KEY=$REACT_APP_API_KEY
@@ -159,7 +162,7 @@ jobs:                                 # Job 설정
         run: pwd
       # 목록 확인
       - name: 목룍 확인
-        run: ls
+        run: ls -l
 
       # ncloude 에 배포하기 테스트
       - name: Deploy                  
