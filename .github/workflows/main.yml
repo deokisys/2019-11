@@ -83,6 +83,9 @@ jobs:                                 # Job 설정
         run: aws configure set secret_key ${{ secrets.AWS_ACCESS_KEY_ID }}
 
       - name: aws config
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
         run: aws configure list
 
       # - name: aws 버킷리스트
