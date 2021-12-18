@@ -43,6 +43,9 @@ jobs:                                 # Job 설정
       #       ${{ runner.OS }}-build-
       #       ${{ runner.OS }}-
 
+      - name: rm p l
+        run: rm package-lock.json
+
       - name: npm install           # 설치
         run: npm install
         # working-directory: ${{ env.working-directory }}
