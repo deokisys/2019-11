@@ -70,6 +70,11 @@ jobs:                                 # Job 설정
       - name: aws 버전확인
         run: aws --version
 
+      - name: aws help
+        run: aws help
+
+      # - name: aws 버킷리스트
+      #   run: aws s3 ls --region ap-northeast-2  
       # - name: aws 버킷 리스트
       #   env:
       #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -93,12 +98,3 @@ jobs:                                 # Job 설정
       #     aws --endpoint-url=https://kr.object.ncloudstorage.com  \
       #       s3 cp \
       #       s3://palda-action-build/palda-action-container
-
-      - name: Deploy                  
-        uses: prewk/s3-cp-action@v2
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          source: './client'
-          dest: 's3://palda-action-build/palda-action-container'
-          flags: --recursive
