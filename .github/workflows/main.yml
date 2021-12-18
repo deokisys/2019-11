@@ -98,6 +98,11 @@ jobs:                                 # Job 설정
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls s3://palda-action-build
 
+      - name: aws 오브젝트 리스트2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: aws --endpoint-url=https://kr.object.ncloudstorage.com s3api list-objects --bucket palda-action-build
 
       # ncloude 에 배포하기 테스트
       # - name: Deploy                  
