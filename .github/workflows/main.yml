@@ -141,7 +141,7 @@ jobs:                                 # Job 설정
         run: ls -l
       
       - name: find
-        run: find / -name .env
+        run: find . -name .env
 
 
 
