@@ -77,11 +77,6 @@ jobs:                                 # Job 설정
       - name: aws help2
         run: aws s3 help
 
-      - name: config set1
-        run: aws configure set access_key ${{ secrets.AWS_ACCESS_KEY_ID }}
-      - name: config set2 
-        run: aws configure set secret_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
       - name: aws config
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -97,11 +92,11 @@ jobs:                                 # Job 설정
         run: aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls
 
 
-      # - name: aws 오브젝트 리스트
-      #   env:
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #   run: aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls s3://palda-action-build
+      - name: aws 오브젝트 리스트
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls s3://palda-action-build
 
 
       # ncloude 에 배포하기 테스트
