@@ -31,8 +31,8 @@ jobs:                                 # Job 설정
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: npm
-          cache-dependency-path: ${{env.working-directory}}/package-lock.json
+          cache: yarn
+          cache-dependency-path: ${{env.working-directory}}/yarn.lock
 
       # - name: cache node modules # node_models를 캐시하여 매번npm install 시간 아끼기
       #   uses: actions/cache@v2
@@ -46,8 +46,8 @@ jobs:                                 # Job 설정
       - name: rm p l
         run: rm package-lock.json
 
-      - name: npm install           # 설치
-        run: npm install
+      - name: yarn install           # 설치
+        run: yarn install
         # working-directory: ${{ env.working-directory }}
 
       # .env파일 만들기!
@@ -113,11 +113,12 @@ jobs:                                 # Job 설정
       - name: .env파일 만들기2
         run: |
           touch .env
-          echo REACT_APP_DEV_API=${{ secrets.REACT_APP_DEV_API}}>> .env
-          echo REACT_APP_DEV_CHAT=${{ secrets.REACT_APP_DEV_CHAT}}>> .env
+          echo REACT_APP_DEV_CLIENT=http://palda.deokisys.site >> .env
+          echo REACT_APP_DEV_API=${{ secrets.REACT_APP_DEV_API}} >> .env
+          echo REACT_APP_DEV_CHAT=${{ secrets.REACT_APP_DEV_CHAT}} >> .env
 
-          echo REACT_APP_PROD_API=${{ secrets.REACT_APP_PROD_API}}>> .env 
-          echo REACT_APP_PROD_CHAT=${{ secrets.REACT_APP_PROD_CHAT}}>> .env 
+          echo REACT_APP_PROD_API=${{ secrets.REACT_APP_PROD_API}} >> .env 
+          echo REACT_APP_PROD_CHAT=${{ secrets.REACT_APP_PROD_CHAT}} >> .env 
 
           echo REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY}}>> .env
           echo REACT_APP_AUTH_DOMAIN=${{ secrets.REACT_APP_AUTH_DOMAIN}}>> .env
@@ -174,14 +175,11 @@ jobs:                                 # Job 설정
           # REACT_APP_DEV_OAUTH_KAKAO_KEY: ${{ secrets.REACT_APP_DEV_OAUTH_KAKAO_KEY}}
           # REACT_APP_DEV_OAUTH_GOOGLE_KEY: ${{ secrets.REACT_APP_DEV_OAUTH_GOOGLE_KEY}}
 
-      - name: env cmd 설치
-        run: npm install -g env-cmd
-      # - name: script g 설치
-      #   run: npm install -g react-scripts
+      - run: npm -v
 
       - name:  build            # 빌드시작
         # run: env-cmd -f .env react-scripts build
-        run: npm run build
+        run: yarn run build
                 
       
       # - name: gh설치
