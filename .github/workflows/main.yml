@@ -101,7 +101,7 @@ jobs:                                 # Job 설정
           REACT_APP_DEV_OAUTH_GOOGLE_KEY: ${{ secrets.REACT_APP_DEV_OAUTH_GOOGLE_KEY}}
 
       - name: env 파일 보기
-        run: vi .env
+        run: cat .env
       
       - name: yarn build            # 빌드시작
         run: yarn build
