@@ -78,9 +78,9 @@ jobs:                                 # Job 설정
         run: aws s3 help
 
       - name: config set1
-        run: aws config set access_key ${{ secrets.AWS_ACCESS_KEY_ID }}
+        run: aws configure set access_key ${{ secrets.AWS_ACCESS_KEY_ID }}
       - name: config set2 
-        run: aws config set secret_key ${{ secrets.AWS_ACCESS_KEY_ID }}
+        run: aws configure set secret_key ${{ secrets.AWS_ACCESS_KEY_ID }}
 
       - name: aws config
         run: aws configure list
