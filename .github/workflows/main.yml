@@ -113,12 +113,12 @@ jobs:                                 # Job 설정
       - name: .env파일 만들기2
         run: |
           touch .env
-          echo REACT_APP_DEV_CLIENT=http://palda.deokisys.site >> .env
-          echo REACT_APP_DEV_API=${{ secrets.REACT_APP_DEV_API}} >> .env
-          echo REACT_APP_DEV_CHAT=${{ secrets.REACT_APP_DEV_CHAT}} >> .env
+          echo REACT_APP_DEV_CLIENT=http://palda-action-build.s3-website.kr.object.ncloudstorage.com/ >> .env
+          echo REACT_APP_DEV_API=http://106.10.33.179:3000 >> .env
+          echo REACT_APP_DEV_CHAT=http://106.10.33.179:4000 >> .env
 
-          echo REACT_APP_PROD_API=${{ secrets.REACT_APP_PROD_API}} >> .env 
-          echo REACT_APP_PROD_CHAT=${{ secrets.REACT_APP_PROD_CHAT}} >> .env 
+          echo REACT_APP_PROD_API=http://106.10.33.179:3000 >> .env 
+          echo REACT_APP_PROD_CHAT=http://106.10.33.179:4000 >> .env 
 
           echo REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY}}>> .env
           echo REACT_APP_AUTH_DOMAIN=${{ secrets.REACT_APP_AUTH_DOMAIN}}>> .env
