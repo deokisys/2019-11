@@ -108,6 +108,9 @@ jobs:                                 # Job 설정
       # cp확인
       - name: 현재 위치 확인
         run: pwd
+      # 목록 확인
+      - name: 목룍 확인
+        run: ls
 
       # ncloude 에 배포하기 테스트
       - name: Deploy                  
@@ -116,5 +119,4 @@ jobs:                                 # Job 설정
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           aws --endpoint-url=https://kr.object.ncloudstorage.com  \
-            s3 cp \
-            s3://palda-action-build/palda-action-container
+            s3 cp ./build s3://palda-action-build/palda-action-container
