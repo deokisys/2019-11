@@ -172,7 +172,7 @@ jobs:                                 # Job 설정
           # REACT_APP_DEV_OAUTH_GOOGLE_KEY: ${{ secrets.REACT_APP_DEV_OAUTH_GOOGLE_KEY}}
 
       - name: env cmd 설치
-        run: yarn add env-cmd
+        run: npm install -g env-cmd
 
       - name:  build            # 빌드시작
         run: env-cmd -f .env react-scripts build
