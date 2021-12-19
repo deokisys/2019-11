@@ -45,6 +45,8 @@ jobs:                                 # Job 설정
         run: npm install -g dotenv
       - name: cross env
         run: npm install -g cross-env
+      - name: env-cmd 설치
+        run: npm install -g env-cmd 
 
       - name: yarn install           # 설치
         run: yarn install

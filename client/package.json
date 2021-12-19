@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "env-cmd -f .env react-scripts build",
     "build:dev": "react-scripts --max_old_space_size=768 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
