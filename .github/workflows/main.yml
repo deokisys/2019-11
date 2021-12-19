@@ -253,7 +253,7 @@ jobs:                                 # Job 설정
           REACT_APP_DEV_KAKAO_KEY: ${{ secrets.REACT_APP_DEV_KAKAO_KEY}}
           REACT_APP_DEV_OAUTH_KAKAO_KEY: ${{ secrets.REACT_APP_DEV_OAUTH_KAKAO_KEY}}
           REACT_APP_DEV_OAUTH_GOOGLE_KEY: ${{ secrets.REACT_APP_DEV_OAUTH_GOOGLE_KEY}}
-        run: yarn run build:production
+        run: yarn run build
                 
       
       # - name: gh설치
