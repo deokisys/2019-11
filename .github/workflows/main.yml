@@ -43,8 +43,9 @@ jobs:                                 # Job 설정
       #       ${{ runner.OS }}-build-
       #       ${{ runner.OS }}-
 
-      - name: rm p l
-        run: rm package-lock.json
+      # env사용하기
+      - name: dot env
+        run: npm install -g dotenv
 
       - name: yarn install           # 설치
         run: yarn install
