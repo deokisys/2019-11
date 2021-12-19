@@ -15,6 +15,36 @@ jobs:                                 # Job 설정
     env:
       CI: false # Treating warnings as errors because process.env.CI = true. 경고가 에러로 나와서
       working-directory: ./client
+      REACT_APP_DEV_API: ${{ secrets.REACT_APP_DEV_API}}
+      REACT_APP_DEV_CHAT: ${{ secrets.REACT_APP_DEV_CHAT}}
+      ## Firebase
+      REACT_APP_DEV_API_KEY: ${{ secrets.REACT_APP_DEV_API_KEY}}
+      REACT_APP_DEV_AUTH_DOMAIN: ${{ secrets.REACT_APP_DEV_AUTH_DOMAIN}}
+      REACT_APP_DEV_DATABASE_URL: = ${{ secrets.REACT_APP_DEV_DATABASE_URL}}
+      REACT_APP_DEV_PROJECT_ID: = ${{ secrets.REACT_APP_DEV_PROJECT_ID}}
+      REACT_APP_DEV_STORAGE_BUCKET: = ${{ secrets.REACT_APP_DEV_STORAGE_BUCKET}}
+      REACT_APP_DEV_MESSAGING_SENDERID: = ${{ secrets.REACT_APP_DEV_MESSAGING_SENDERID}}
+      REACT_APP_DEV_APP_ID: ${{ secrets.REACT_APP_DEV_APP_ID}}
+      REACT_APP_DEV_MEASUREMENT_ID:  ${{ secrets.REACT_APP_DEV_MEASUREMENT_ID}}
+
+      REACT_APP_PROD_API: ${{ secrets.REACT_APP_PROD_API}}
+      REACT_APP_PROD_CHAT: ${{ secrets.REACT_APP_PROD_CHAT}}
+      ## Firebase
+      REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY}}
+      REACT_APP_AUTH_DOMAIN: ${{ secrets.REACT_APP_AUTH_DOMAIN}}
+      REACT_APP_DATABASE_URL: ${{ secrets.REACT_APP_DATABASE_URL}}
+      REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID}}
+      REACT_APP_STORAGE_BUCKET: ${{ secrets.REACT_APP_STORAGE_BUCKET}}
+      REACT_APP_MESSAGING_SENDERID: ${{ secrets.REACT_APP_MESSAGING_SENDERID}}
+      REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID}}
+      REACT_APP_MEASUREMENT_ID: ${{ secrets.REACT_APP_MEASUREMENT_ID}}
+      REACT_APP_KAKAO_KEY: ${{ secrets.REACT_APP_KAKAO_KEY}}
+      REACT_APP_GOOGLE_KEY: ${{ secrets.REACT_APP_GOOGLE_KEY}}
+      DEV_BUCKET: ${{ secrets.DEV_BUCKET}}
+      ##oauth
+      REACT_APP_DEV_KAKAO_KEY: ${{ secrets.REACT_APP_DEV_KAKAO_KEY}}
+      REACT_APP_DEV_OAUTH_KAKAO_KEY: ${{ secrets.REACT_APP_DEV_OAUTH_KAKAO_KEY}}
+      REACT_APP_DEV_OAUTH_GOOGLE_KEY: ${{ secrets.REACT_APP_DEV_OAUTH_GOOGLE_KEY}}
     strategy:
       matrix:
         node-version: [12.13.0]     # 12.13.0 버전 실행
@@ -43,16 +73,24 @@ jobs:                                 # Job 설정
       # env사용하기
       - name: dot env
         run: npm install -g dotenv
+      - name: dot env
+        run: yarn add dotenv
       - name: cross env
         run: npm install -g cross-env
+      - name: dot cross-env
+        run: yarn add cross-env
       - name: env-cmd 설치
         run: npm install -g env-cmd 
+      - name: dot cross-env
+        run: yarn add env-cmd 
 
       - name: yarn install           # 설치
         run: yarn install
         # working-directory: ${{ env.working-directory }}
 
       # .env파일 만들기!
+      - name: .env생성
+        run: touch .env
 
       - name: .env파일 만들기
         env:
@@ -249,11 +287,3 @@ jobs:                                 # Job 설정
         run: |
           aws --endpoint-url=https://kr.object.ncloudstorage.com  \
             s3 cp --recursive ./build s3://palda-action-build
-         # ncloude 에 배포하기 테스트
-      - name: env보기                  
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          aws --endpoint-url=https://kr.object.ncloudstorage.com  \
-            s3 cp .env s3://palda-action-build
