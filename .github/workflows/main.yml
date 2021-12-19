@@ -143,6 +143,10 @@ jobs:                                 # Job 설정
       CI: false 
       working-directory: ./client
     steps:  
+      - name: checkout source code    # 파일 가져오기
+        uses: actions/checkout@v2  # 브랜치 확인
+        with:
+          ref: 'actionTEST'
       - name: pwd
         run: pwd
 
