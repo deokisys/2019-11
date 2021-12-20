@@ -317,11 +317,31 @@ jobs:                                 # Job 설정
       #       s3 cp --recursive ./build s3://palda-action-build
 
       # ssh로 연결하기
-      - name: ssh 연결하기
-        uses: appleboy/ssh-action@master
+      # - name: ssh 연결하기
+      #   uses: appleboy/ssh-action@v0.1.4
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     username: ${{ secrets.SSH_USERNAME }}
+      #     password: ${{ secrets.SSH_PASSWORD }}
+      #     port: ${{ secrets.SSH_PORT }}
+      #     script: whoami
+      # - name: scp
+      #   run: scp -P ${{secrets.SSH_PORT}} -r ./build ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:/root 
+      - name: scp 연습1
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
-          script: whoami
+          source: "build"
+          target: "root"
+
+      # - name: scp 연습2
+      #   uses: garygrossgarten/github-action-scp@release
+      #   with:
+      #     local: build
+      #     remote: root
+      #     host: ${{ secrets.SSH_HOST }}
+      #     username: ${{ secrets.SSH_USERNAME }}
+      #     password: ${{ secrets.SSH_PASSWORD }}
