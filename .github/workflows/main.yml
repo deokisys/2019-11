@@ -265,42 +265,39 @@ jobs:                                 # Job 설정
       # - name: gh올리기
       #   run: gh-pages -d ${{ env.working-directory }}/dist
 
-      - name: aws 버전확인
-        run: aws --version
+      # - name: aws 버전확인
+      #   run: aws --version
 
-      - name: aws help
-        run: aws help
+      # - name: aws help
+      #   run: aws help
 
 
-      - name: aws help2
-        run: aws s3 help
-
-      - name: aws config
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: aws configure list
+      # - name: aws config
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #   run: aws configure list
 
       # - name: aws 버킷리스트
       #   run: aws --endpoint-url=https://kr.object.ncloudstorage.com --region kr-standard  s3 ls  
-      - name: aws 버킷 리스트
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls
+      # - name: aws 버킷 리스트
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #   run: aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls
 
 
-      - name: aws 오브젝트 리스트
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls s3://palda-action-build
+      # - name: aws 오브젝트 리스트
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #   run: aws --endpoint-url=https://kr.object.ncloudstorage.com s3 ls s3://palda-action-build
 
-      - name: aws 오브젝트 리스트2
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: aws --endpoint-url=https://kr.object.ncloudstorage.com s3api list-objects --bucket palda-action-build
+      # - name: aws 오브젝트 리스트2
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #   run: aws --endpoint-url=https://kr.object.ncloudstorage.com s3api list-objects --bucket palda-action-build
 
 
       # cp확인
@@ -311,10 +308,20 @@ jobs:                                 # Job 설정
         run: ls -l
 
       # ncloude 에 배포하기 테스트
-      - name: Deploy                  
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          aws --endpoint-url=https://kr.object.ncloudstorage.com  \
-            s3 cp --recursive ./build s3://palda-action-build
+      # - name: Deploy                  
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #   run: |
+      #     aws --endpoint-url=https://kr.object.ncloudstorage.com  \
+      #       s3 cp --recursive ./build s3://palda-action-build
+
+      # ssh로 연결하기
+      - name: ssh 연결하기
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: whoami
