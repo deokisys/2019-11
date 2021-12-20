@@ -337,8 +337,8 @@ jobs:                                 # Job 설정
       #     source: "build"
       #     target: "root"
 
-      - name: scp 기본 연습
-        run: sshpass -p ${{ secrets.SSH_PASSWORD }} scp -o StrictHostKeyChecking=no -P ${{secrets.SSH_PORT}} -r ./build ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:/root 
+      - name: scp 넘기기
+        run: sshpass -p ${{ secrets.SSH_PASSWORD }} scp -o StrictHostKeyChecking=no -P ${{secrets.SSH_PORT}} -r ./build ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:/root/testtest
 
       # - name: scp 연습2
       #   uses: garygrossgarten/github-action-scp@release
