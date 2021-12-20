@@ -338,7 +338,8 @@ jobs:                                 # Job 설정
       #     target: "root"
 
       - name: scp 넘기기
-        run: sshpass -p ${{ secrets.SSH_PASSWORD }} scp -o StrictHostKeyChecking=no -P ${{secrets.SSH_PORT}} -r ./build/* ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:/var/www/testtest
+        # run: sshpass -p ${{ secrets.SSH_PASSWORD }} scp -o StrictHostKeyChecking=no -P ${{secrets.SSH_PORT}} -r ./build/* ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:/var/www/testtest
+        run: rsync --rsh="sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -l ${{secrets.SSH_USERNAME}}" ./build/ ${{secrets.SSH_HOST}}:/var/www/testtest/ 
 
       # - name: scp 연습2
       #   uses: garygrossgarten/github-action-scp@release
