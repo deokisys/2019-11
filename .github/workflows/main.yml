@@ -337,8 +337,11 @@ jobs:                                 # Job 설정
       #     source: "build"
       #     target: "root"
 
-      - name: scp 넘기기
+      # - name: scp 넘기기
         # run: sshpass -p ${{ secrets.SSH_PASSWORD }} scp -o StrictHostKeyChecking=no -P ${{secrets.SSH_PORT}} -r ./build/* ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:/var/www/testtest
+      - name: rsync v
+        run: rsync --version
+      - name: rsync
         run: rsync --rsh="sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -l ${{secrets.SSH_USERNAME}}" ./build/ ${{secrets.SSH_HOST}}:/var/www/testtest/ 
 
       # - name: scp 연습2
