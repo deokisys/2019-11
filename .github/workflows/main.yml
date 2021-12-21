@@ -365,8 +365,6 @@ jobs:                                 # Job 설정
       #   run: gh-pages -d ${{ env.working-directory }}/dist
 
       # git page 테스트 
-      - name: jq
-        run: apt install jq
       - name: package.json추가
         run: jq '.homepage |= . + https://deokisys.github.io/2019-11' package.json
       - name: 확인
