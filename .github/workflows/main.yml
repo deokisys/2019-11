@@ -365,8 +365,10 @@ jobs:                                 # Job 설정
       #   run: gh-pages -d ${{ env.working-directory }}/dist
 
       # git page 테스트 
-      - name: package.json추가
-        run: jq '.homepage |= . + https://deokisys.github.io/2019-11' package.json
+      - name: package.json에 homepage 수정
+        run: |
+        echo "`jq 'del(.homepage)' package.json`" > package.json
+        echo "`jq '.homepage |= . + "https://deokisys.github.io/2019-11"' package.json`" > package.json
       - name: 확인
         run: cat package.json
       - name: build 다시
