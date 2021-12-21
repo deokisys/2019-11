@@ -368,4 +368,5 @@ jobs:                                 # Job 설정
         uses: peaceiris/actions-gh-pages@v3.7.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          publish_branch: actionTEST # 작동되는 브랜치명 기본 gh-pages
+          publish_dir: ./client/build
