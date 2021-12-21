@@ -365,6 +365,49 @@ jobs:                                 # Job 설정
       #   run: gh-pages -d ${{ env.working-directory }}/dist
 
       # git page 테스트 
+      - name: jq
+        run: apt install jq
+      - name: package.json추가
+        run: jq '.homepage |= . + https://deokisys.github.io/2019-11' package.json
+      - name: 확인
+        run: cat package.json
+      - name: build 다시
+        run: rm -r build
+      - name:  build            # 빌드시작
+        env:
+          # run: env-cmd -f .env react-scripts build
+          REACT_APP_DEV_API: ${{ secrets.REACT_APP_DEV_API}}
+          REACT_APP_DEV_CHAT: ${{ secrets.REACT_APP_DEV_CHAT}}
+          ## Firebase
+          REACT_APP_DEV_API_KEY: ${{ secrets.REACT_APP_DEV_API_KEY}}
+          REACT_APP_DEV_AUTH_DOMAIN: ${{ secrets.REACT_APP_DEV_AUTH_DOMAIN}}
+          REACT_APP_DEV_DATABASE_URL: = ${{ secrets.REACT_APP_DEV_DATABASE_URL}}
+          REACT_APP_DEV_PROJECT_ID: = ${{ secrets.REACT_APP_DEV_PROJECT_ID}}
+          REACT_APP_DEV_STORAGE_BUCKET: = ${{ secrets.REACT_APP_DEV_STORAGE_BUCKET}}
+          REACT_APP_DEV_MESSAGING_SENDERID: = ${{ secrets.REACT_APP_DEV_MESSAGING_SENDERID}}
+          REACT_APP_DEV_APP_ID: ${{ secrets.REACT_APP_DEV_APP_ID}}
+          REACT_APP_DEV_MEASUREMENT_ID:  ${{ secrets.REACT_APP_DEV_MEASUREMENT_ID}}
+
+          REACT_APP_PROD_API: ${{ secrets.REACT_APP_PROD_API}}
+          REACT_APP_PROD_CHAT: ${{ secrets.REACT_APP_PROD_CHAT}}
+          ## Firebase
+          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY}}
+          REACT_APP_AUTH_DOMAIN: ${{ secrets.REACT_APP_AUTH_DOMAIN}}
+          REACT_APP_DATABASE_URL: ${{ secrets.REACT_APP_DATABASE_URL}}
+          REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID}}
+          REACT_APP_STORAGE_BUCKET: ${{ secrets.REACT_APP_STORAGE_BUCKET}}
+          REACT_APP_MESSAGING_SENDERID: ${{ secrets.REACT_APP_MESSAGING_SENDERID}}
+          REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID}}
+          REACT_APP_MEASUREMENT_ID: ${{ secrets.REACT_APP_MEASUREMENT_ID}}
+          REACT_APP_KAKAO_KEY: ${{ secrets.REACT_APP_KAKAO_KEY}}
+          REACT_APP_GOOGLE_KEY: ${{ secrets.REACT_APP_GOOGLE_KEY}}
+          DEV_BUCKET: ${{ secrets.DEV_BUCKET}}
+          ##oauth
+          REACT_APP_DEV_KAKAO_KEY: ${{ secrets.REACT_APP_DEV_KAKAO_KEY}}
+          REACT_APP_DEV_OAUTH_KAKAO_KEY: ${{ secrets.REACT_APP_DEV_OAUTH_KAKAO_KEY}}
+          REACT_APP_DEV_OAUTH_GOOGLE_KEY: ${{ secrets.REACT_APP_DEV_OAUTH_GOOGLE_KEY}}
+        run: yarn run build
+
       - name: 깃 페이지 테스트
         uses: peaceiris/actions-gh-pages@v3.7.3
         with:
