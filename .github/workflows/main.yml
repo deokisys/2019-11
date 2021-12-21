@@ -343,7 +343,7 @@ jobs:                                 # Job 설정
       # - name: rsync v
       #   run: rsync --version
       - name: rsync cli
-        run: `rsync --rsh = "sshpass -p ${{secrets.SSH_KEY}} ssh -l ${{secrets.SSH_USERNAME}} -p ${{secrets.SSH_PORT}}" build/ ${{secrets.SSH_HOST}}:/var/www/testtest/`
+        run: rsync --rsh = "sshpass -p ${{secrets.SSH_KEY}} ssh -l ${{secrets.SSH_USERNAME}} -p ${{secrets.SSH_PORT}}" build/ ${{secrets.SSH_HOST}}:/var/www/testtest/
       # - name: rsync market
       #   uses: burnett01/rsync-deployments@5.1
       #   with:
