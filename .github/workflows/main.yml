@@ -352,7 +352,7 @@ jobs:                                 # Job 설정
           remote_path: /var/www/testtest/
           remote_host: ${{secrets.SSH_HOST}}
           remote_user: ${{secrets.SSH_USERNAME}}
-          remote_key: ${{ secrets.SSH_PASSWORD }}
+          remote_key: ${{ secrets.SSH_KEY }}
       # - name: scp 연습2
       #   uses: garygrossgarten/github-action-scp@release
       #   with:
