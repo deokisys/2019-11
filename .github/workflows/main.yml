@@ -256,14 +256,6 @@ jobs:                                 # Job 설정
         run: yarn run build
                 
       
-      # - name: gh설치
-      #   run: yarn add gh-pages
-        # working-directory: ${{ env.working-directory }}  
-      
-      # - name: gh확인
-      #   run: gh-pages -v
-      # - name: gh올리기
-      #   run: gh-pages -d ${{ env.working-directory }}/dist
 
       # - name: aws 버전확인
       #   run: aws --version
@@ -363,16 +355,18 @@ jobs:                                 # Job 설정
       #     username: ${{ secrets.SSH_USERNAME }}
       #     password: ${{ secrets.SSH_PASSWORD }}
 
+      # - name: gh설치
+      #   run: yarn add gh-pages
+        # working-directory: ${{ env.working-directory }}  
+      
+      # - name: gh확인
+      #   run: gh-pages -v
+      # - name: gh올리기
+      #   run: gh-pages -d ${{ env.working-directory }}/dist
+
       # git page 테스트 
-      # - name: 깃 페이지 테스트
-      #   uses: peaceiris/actions-gh-pages@v3.7.3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: ./client/build
-      - name: git page test2
-        uses: ptienchuan/deploy-github-pages-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 깃 페이지 테스트
+        uses: peaceiris/actions-gh-pages@v3.7.3
         with:
-          source-directory: "client/build"
-          target-branch: "gh-pages"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: client/build
